@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from accounts.models import User
 # Create your views here.
 def signup(request) :
     if request.method == "POST":
@@ -11,6 +12,12 @@ def signup(request) :
         password1 = request.POST["password_1"]
         password2 = request.POST["password_2"]
         email = request.POST["email"]
+        nid =  request.POST["nid"]
+        phone =  request.POST["phone"]
+        street_no =  request.POST["street_no"]
+        house_no =  request.POST["house_no"]
+        postalcode =  request.POST["postalcode"]
+        policestation =  request.POST["policestation"]
 
         if password1 == password2 :
             if User.objects.filter(username = username).exists():
@@ -20,7 +27,8 @@ def signup(request) :
                 messages.info(request, "Email Taken")     
                 return redirect("signup")
             else :     
-                user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name)
+                user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name, nid = nid,
+                                                phone= phone, street_no = street_no, house_no = house_no, postal_code = postalcode, police_station = policestation)
                 user.save()
 
                 messages.info(request, "User Created Successfully")
