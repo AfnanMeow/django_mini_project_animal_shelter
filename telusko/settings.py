@@ -82,11 +82,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': BASE_DIR / 'db.sqlite3',
-        "NAME" : "bracu_shelter",
+        "NAME" : "BRACU_SHELTER",
         "USER" : "root",
-        "PASSWORD" : "1234",
+        "PASSWORD" : "12345",
         "HOST" : "localhost",
-        "PORT" : "3306",
+        "PORT" : "3305",
 
     }
 }
