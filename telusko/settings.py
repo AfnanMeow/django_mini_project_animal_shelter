@@ -84,9 +84,9 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
         "NAME" : "BRACU_SHELTER",
         "USER" : "root",
-        "PASSWORD" : "12345",
+        "PASSWORD" : "1234",
         "HOST" : "localhost",
-        "PORT" : "3305",
+        "PORT" : "3306",
 
     }
 }

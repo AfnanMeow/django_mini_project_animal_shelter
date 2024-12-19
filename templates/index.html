@@ -35,7 +35,13 @@
 									<li><a href="about.html">About us</a></li>
 									<li><a href="#">Services</a></li>
 									<li><a href="contact.html">Contact</a></li>
+									{% if user.is_authenticated %}
+									<li><b>🖐{{user.first_name}}</b></li>
+									<li><h2><b><a href="accounts/logout">Logout</a><b></h2></li>
+									{% else %}
+
 									<li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
+									{% endif %}
 
 								</ul>
 							</nav>
@@ -170,13 +176,13 @@
 					<div class="home_search_container">
 						<div class="home_search_title">Search for your Animal</div>
 						<div class="home_search_content">
-							<form action="#" class="home_search_form" id="home_search_form">
+							<form action="" method="get" class="home_search_form" id="home_search_form">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<input type="text" class="search_input search_input_1" placeholder="Animal Name" required="required">
-									<input type="text" class="search_input search_input_2" placeholder="Breed" required="required">
-									<input type="text" class="search_input search_input_3" placeholder="Location" required="required">
-									<input type="text" class="search_input search_input_4" placeholder="Budget" required="required">
-									<button class="home_search_button">search</button>
+									<input type="text" class="search_input search_input_1" placeholder="Serial No", name = "serial_no", value="{{serialno_query}}" >
+									<input type="text" class="search_input search_input_2" placeholder="Name", name = "name", value="{{name_query}}" >
+									<input type="text" class="search_input search_input_3" placeholder="Type", name = "type", value="{{type_query}}" >
+									<input type="text" class="search_input search_input_4" placeholder="Estimated Cost", name = "estimated_cost", value="{{estCost_query}}" >
+									<button class="home_search_button" type="submit">search</button>
 								</div>
 							</form>
 						</div>
@@ -199,9 +205,9 @@
 							<!-- Intro Item -->
 							<div class="col-lg-4 intro_col">
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-									<div class="intro_icon"><img src="{% static 'images/beach.svg' %}" alt=""></div>
+									<div class="intro_icon"><img src="{% static 'images/donor.jpg' %}" alt=""></div>
 									<div class="intro_content">
-										<div class="intro_title">Top Destinations</div>
+										<div class="intro_title">Wanna Donate ?</div>
 										<div class="intro_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
 									</div>
 								</div>
@@ -210,9 +216,9 @@
 							<!-- Intro Item -->
 							<div class="col-lg-4 intro_col">
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-									<div class="intro_icon"><img src="{% static 'images/wallet.svg' %}" alt=""></div>
+									<div class="intro_icon"><img src="{% static 'images/adopter.jpg' %}" alt=""></div>
 									<div class="intro_content">
-										<div class="intro_title">The Best Prices</div>
+										<div class="intro_title">Wanna Adopt Pets?</div>
 										<div class="intro_subtitle"><p>Sollicitudin mauris lobortis in.</p></div>
 									</div>
 								</div>
@@ -221,9 +227,9 @@
 							<!-- Intro Item -->
 							<div class="col-lg-4 intro_col">
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-									<div class="intro_icon"><img src="{% static 'images/suitcase.svg' %}" alt=""></div>
+									<div class="intro_icon"><img src="{% static 'images/authority.jpg' %}" alt=""></div>
 									<div class="intro_content">
-										<div class="intro_title">Amazing Services</div>
+										<div class="intro_title">Staff Signin</div>
 										<div class="intro_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
 									</div>
 								</div>

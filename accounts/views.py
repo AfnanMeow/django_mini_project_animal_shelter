@@ -42,4 +42,42 @@ def signup(request) :
     
 
 def signin(request):
-    return render(request, "signin.html")   
+    if request.method == "POST" :
+        username = request.POST["username"]
+        password1 = request.POST["password_1"]
+
+        user = auth.authenticate(username=username, password = password1)
+        #query = ''' SELECT * 
+                    #FROM accounts_user 
+                    #WHERE username = %s AND password = %s'''
+        #user = User.objects.raw(query, [f"%{username}%",f"%{password1}%"])
+        #print(user.username)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect ("/")
+        
+        else:
+            messages.info(request, "Wrong Username or Password")
+            return render(request, "signin.html")  
+
+    
+    
+    else :
+
+        return render(request, "signin.html")   
+    
+
+
+
+
+
+
+
+
+
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect ("/")
