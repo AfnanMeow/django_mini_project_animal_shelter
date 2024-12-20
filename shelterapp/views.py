@@ -11,6 +11,7 @@ def index(request):
     name_query = request.GET.get('name', '')
     type_query = request.GET.get('type', '')
     estCost_query = request.GET.get('estimated_cost', '')
+    status_query = request.GET.get('status', '')
     # Fetch all animals from the database if Queries are empty
     if serialno_query and name_query and type_query and estCost_query == None :
         pets = Pet.objects.all()
@@ -45,6 +46,11 @@ def index(request):
             except ValueError:
                 #pets = pets.none()  # Invalid budget input
                 query += " AND 1=0"
+        
+        if status_query:
+            # Add condition for status filter
+            query += " AND status = %s"
+            params.append(status_query)
                 
         pets = Pet.objects.raw(query, params)
 
@@ -55,4 +61,6 @@ def index(request):
             "serialno_query": serialno_query,
             "name_query": name_query,
             "type_query": type_query,
-            "estCost_query": estCost_query,})
+            "estCost_query": estCost_query,
+            "status_query": status_query,
+            })

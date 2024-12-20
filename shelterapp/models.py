@@ -17,12 +17,22 @@ from accounts.models import User, Donor, Adopter, Authority
 
 # PET Model
 class Pet(models.Model):
+
+    AVAILABLE = 'AVAILABLE'
+    ADOPTED = 'ADOPTED'
+    
+    STATUS_CHOICES = [
+        (AVAILABLE, 'Available'),
+        (ADOPTED, 'Adopted'),
+    ]
     serial_no = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=255)
     img = models.ImageField(upload_to = "pics")
     type = models.CharField(max_length=50)  # e.g., Dog, Cat, Bird
     description = models.TextField()
     estimated_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=10,choices=STATUS_CHOICES,default=AVAILABLE,)
+
 
     # Relationships
     donor = models.ForeignKey(Donor, to_field='user_id', related_name="donated_pets", on_delete=models.CASCADE, unique=True)

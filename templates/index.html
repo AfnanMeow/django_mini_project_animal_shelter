@@ -182,6 +182,11 @@
 									<input type="text" class="search_input search_input_2" placeholder="Name", name = "name", value="{{name_query}}" >
 									<input type="text" class="search_input search_input_3" placeholder="Type", name = "type", value="{{type_query}}" >
 									<input type="text" class="search_input search_input_4" placeholder="Estimated Cost", name = "estimated_cost", value="{{estCost_query}}" >
+									<select name="status" class="search_input search_input_5">
+										<option value="">-- Select Status --</option>
+										<option value="AVAILABLE" {% if status_query == 'AVAILABLE' %}selected{% endif %}>Available</option>
+										<option value="ADOPTED" {% if status_query == 'ADOPTED' %}selected{% endif %}>Adopted</option>
+									</select>
 									<button class="home_search_button" type="submit">search</button>
 								</div>
 							</form>
