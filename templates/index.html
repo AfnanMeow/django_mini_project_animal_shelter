@@ -254,7 +254,7 @@
 			<div class="row">
 				<div class="col text-center">
 					<div class="section_subtitle">Meet our lovable furry babies!</div>
-					<div class="section_title"><h2>Small animals Looking for their forever homes</h2></div></h2></div>
+					<div class="section_title"><h2>Small animals Looking for their forever homes</h2></div>
 				</div>
 			</div>
 			<div class="row destinations_row">
@@ -266,8 +266,11 @@
 						<div class="destination item">
 							<div class="destination_image">
 								<img src="{{baseURL}}/{{pet_i.img}}" alt="">
-								
-								<div class="spec_offer text-center"><a href="#"> Show Details</a></div>
+								{% if user.is_authenticated %}
+								<div class="spec_offer text-center"><a href="{% url 'show_pet_details' serial_no=pet_i.serial_no %}"> Show Details</a></div>
+								{% else %}
+								<div class="spec_offer text-center"><a href="{% url 'signup' %}"> Show Details</a></div>
+								{% endif %}
 								
 							</div>
 							<div class="destination_content">

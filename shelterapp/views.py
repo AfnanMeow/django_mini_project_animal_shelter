@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404  #sudhu get_object jani kmne use kore ??
 from .models import Pet
-from django.db.models import Q
+#from django.db.models import Q
+
 
 # Create your views here.
 
@@ -64,3 +65,12 @@ def index(request):
             "estCost_query": estCost_query,
             "status_query": status_query,
             })
+    
+
+
+#now we're making history the very first time by sending request with a value
+
+def show_pet_details(request, serial_no):
+    pet = get_object_or_404(Pet, serial_no=serial_no)
+    return render(request, 'show_pet_details.html', {'pet': pet})
+
