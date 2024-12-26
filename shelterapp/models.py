@@ -27,8 +27,9 @@ class Pet(models.Model):
     status = models.CharField(max_length=10, default="AVAILABLE")
     donation_date = models.DateField()
     donation_time = models.TimeField()
-    adoption_date = models.DateField()
-    adoption_time = models.TimeField()
+    adoption_date = models.DateField(null=True, blank=True)
+    adoption_time = models.TimeField(null=True, blank=True)
+
 
     # Relationships
 
