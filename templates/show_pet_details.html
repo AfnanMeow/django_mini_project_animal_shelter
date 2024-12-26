@@ -122,10 +122,10 @@
                             <p><strong>Type:</strong> {{ pet.type }}</p>
                             <p><strong>Description:</strong> {{ pet.description }}</p>
                             <p><strong>Estimated Cost:</strong> ৳{{ pet.estimated_cost }}</p>
-                            <p><strong>Status:</strong> {{ pet.get_status_display }}</p>
-                            <p><strong>{{ pet.donor }}</strong> </p>
+                            <p><strong>Status:</strong> {{pet.status}}</p>
+                            <p><strong>{{ pet.donor_nid_id }}</strong> </p>
                             {% if pet.adopter %}
-                                <p><strong>{{ pet.adopter }}</strong> </p>
+                                <p><strong>{{ pet.adopter_nid_id }}</strong> </p>
                             {% else %}
                                 <p><strong>Adopter:</strong> Not yet adopted</p>
                             {% endif %}

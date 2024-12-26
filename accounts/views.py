@@ -14,8 +14,10 @@ def signup(request) :
         email = request.POST["email"]
         nid =  request.POST["nid"]
         phone =  request.POST["phone"]
-        street_no =  request.POST["street_no"]
-        house_no =  request.POST["house_no"]
+        street =  request.POST["street"]
+        house = request.POST["house"]
+        #street_no =  request.POST["street_no"]
+        #house_no = request.POST["house_no"]
         postalcode =  request.POST["postalcode"]
         policestation =  request.POST["policestation"]
 
@@ -26,9 +28,11 @@ def signup(request) :
             elif  User.objects.filter(email=email).exists():
                 messages.info(request, "Email Taken")     
                 return redirect("signup")
-            else :     
+            else :  
                 user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name, nid = nid,
-                                                phone= phone, street_no = street_no, house_no = house_no, postal_code = postalcode, police_station = policestation)
+                                                phone= phone, street = street, house = house, postal_code = postalcode, police_station = policestation)                              
+                #user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name, nid = nid,
+                                                #phone= phone, street_no = street_no, house_no = house_no, postal_code = postalcode, police_station = policestation)
                 user.save()
 
                 messages.info(request, "User Created Successfully")
