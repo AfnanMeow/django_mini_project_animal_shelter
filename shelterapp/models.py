@@ -27,8 +27,9 @@ class Pet(models.Model):
     status = models.CharField(max_length=10, default="AVAILABLE")
     donation_date = models.DateField()
     donation_time = models.TimeField()
-    adoption_date = models.DateField()
-    adoption_time = models.TimeField()
+    adoption_date = models.DateField(null=True, blank=True)
+    adoption_time = models.TimeField(null=True, blank=True)
+
 
     # Relationships
 
@@ -56,8 +57,10 @@ class Vet(models.Model):
 
 # VISIT Model (Pet visits Vet)
 class Vet_Visit(models.Model):
-    serial_no = models.OneToOneField(Pet, to_field='serial_no', on_delete=models.CASCADE, related_name='visits')
-    vet = models.OneToOneField(Vet, to_field='nid', on_delete=models.CASCADE, related_name='vet_visits')
+    serial_no = models.ForeignKey(Pet, to_field='serial_no', on_delete=models.CASCADE, related_name='visits')
+    vet = models.ForeignKey(Vet, to_field='nid', on_delete=models.CASCADE, related_name='vet_visits')
+    #serial_no = models.OneToOneField(Pet, to_field='serial_no', on_delete=models.CASCADE, related_name='visits')
+    #vet = models.OneToOneField(Vet, to_field='nid', on_delete=models.CASCADE, related_name='vet_visits')
     #serial_no = models.ForeignKey(Pet,to_field='serial_no', on_delete=models.CASCADE, related_name='visits', unique=True)
     #vet = models.ForeignKey(Vet, to_field='email', on_delete=models.CASCADE, related_name='vet_visits', unique = True)
     date = models.DateField()

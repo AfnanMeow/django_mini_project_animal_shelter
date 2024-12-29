@@ -5,7 +5,6 @@ from accounts.models import User
 # Create your views here.
 def signup(request) :
     if request.method == "POST":
-
         first_name = request.POST["first_name"]
         last_name = request.POST["last_name"]
         username = request.POST["username"]
@@ -20,7 +19,6 @@ def signup(request) :
         #house_no = request.POST["house_no"]
         postalcode =  request.POST["postalcode"]
         policestation =  request.POST["policestation"]
-
         if password1 == password2 :
             if User.objects.filter(username = username).exists():
                 messages.info(request, "Username Taken")
@@ -41,10 +39,8 @@ def signup(request) :
             messages.info(request, "Password Not Matching")
         return redirect("signup")
     else:
-
         return render(request, "signup.html")
     
-
 def signin(request):
     if request.method == "POST" :
         username = request.POST["username"]
@@ -71,17 +67,6 @@ def signin(request):
 
         return render(request, "signin.html")   
     
-
-
-
-
-
-
-
-
-
-
-
 def logout(request):
     auth.logout(request)
     return redirect ("/")

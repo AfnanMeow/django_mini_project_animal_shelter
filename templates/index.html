@@ -178,10 +178,16 @@
 						<div class="home_search_content">
 							<form action="" method="get" class="home_search_form" id="home_search_form">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<input type="text" class="search_input search_input_1" placeholder="Serial No", name = "serial_no", value="{{serialno_query}}" >
-									<input type="text" class="search_input search_input_2" placeholder="Name", name = "name", value="{{name_query}}" >
-									<input type="text" class="search_input search_input_3" placeholder="Type", name = "type", value="{{type_query}}" >
-									<input type="text" class="search_input search_input_4" placeholder="Estimated Cost", name = "estimated_cost", value="{{estCost_query}}" >
+									<input type="text" class="search_input search_input_1" placeholder="Name", name = "name", value="{{name_query}}" >  
+									<input type="text" class="search_input search_input_2" placeholder="Serial No", name = "serial_no", value="{{serialno_query}}" >
+									<input type="text" class="search_input search_input_3" placeholder="Estimated Cost", name = "estimated_cost", value="{{estCost_query}}" >                             
+									<select name="type" class="search_input search_input_4">
+										<option value="">--Select Type--</option>
+										<option value="Dog" {% if type_query == 'Dog' %}selected{% endif %}>Dog</option>
+										<option value="Cat" {% if type_query == 'Cat' %}selected{% endif %}>Cat</option>
+										<option value="Fish" {% if type_query == 'Fish' %}selected{% endif %}>Fish</option>
+										<option value="Bird" {% if type_query == 'Bird' %}selected{% endif %}>Bird</option>
+									</select>
 									<select name="status" class="search_input search_input_5">
 										<option value="">--Select Status--</option>
 										<option value="AVAILABLE" {% if status_query == 'AVAILABLE' %}selected{% endif %}>Available</option>
