@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404  #sudhu get_object jani kmne use kore ??
+from django.shortcuts import render, get_object_or_404, redirect  #sudhu get_object jani kmne use kore ??
 from .models import Pet
 #from django.db.models import Q
 
@@ -73,4 +73,32 @@ def index(request):
 def show_pet_details(request, serial_no):
     pet = get_object_or_404(Pet, serial_no=serial_no)
     return render(request, 'show_pet_details.html', {'pet': pet})
+
+
+
+
+# Adoption view
+def adopt_pet(request, serial_no):
+    pet = get_object_or_404(Pet, serial_no=serial_no)
+    
+    # Check if the pet is already adopted
+    if pet.status == 'adopted':
+        # If the pet is already adopted, redirect to the pet details page
+        return redirect('show_pet_details', serial_no=serial_no)
+    
+    # Handle the adoption process
+    if request.method == 'POST':
+        # Get the adopter's NID (assuming it's available in the POST data)
+        adopter_nid = request.POST.get('adopter_nid')
+        
+        # Update the pet's adoption details
+        pet.status = 'Adopted'
+        pet.adopter_nid_id = adopter_nid
+        pet.save()
+
+        # Redirect to the pet details page after adoption
+        return redirect('show_pet_details', serial_no=serial_no)
+
+    return render(request, 'adopt_pet.html', {'pet': pet})
+
 
