@@ -1,4 +1,9 @@
+
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect  #sudhu get_object jani kmne use kore ??
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.db import connection
 from .models import Pet
 #from django.db.models import Q
 
@@ -78,27 +83,35 @@ def show_pet_details(request, serial_no):
 
 
 # Adoption view
+@login_required
+@csrf_exempt
 def adopt_pet(request, serial_no):
-    pet = get_object_or_404(Pet, serial_no=serial_no)
-    
-    # Check if the pet is already adopted
-    if pet.status == 'adopted':
-        # If the pet is already adopted, redirect to the pet details page
-        return redirect('show_pet_details', serial_no=serial_no)
-    
-    # Handle the adoption process
-    if request.method == 'POST':
-        # Get the adopter's NID (assuming it's available in the POST data)
-        adopter_nid = request.POST.get('adopter_nid')
-        
-        # Update the pet's adoption details
-        pet.status = 'Adopted'
-        pet.adopter_nid_id = adopter_nid
-        pet.save()
+    if request.method == "POST":
+        try:
+            adopter_nid = request.user.nid  # Assuming the current user has a `nid` field
+            #print(adopter_nid, "whattttttttt !!!!")
+            #all these Drama for that foreign key constraint, wasted 2 hours straight
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO accounts_adopter (user_id) 
+                    VALUES (%s)
+                """, [adopter_nid])
+            # Update the Pet record in the database using raw SQL
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    UPDATE shelterapp_pet
+                    SET adopter_nid_id = %s, adoption_date = CURRENT_DATE, adoption_time = CURRENT_TIME, status = "Adopted"
+                    WHERE serial_no = %s AND adopter_nid_id IS NULL
+                """, [adopter_nid, serial_no])
 
-        # Redirect to the pet details page after adoption
-        return redirect('show_pet_details', serial_no=serial_no)
+            # Check if the pet was successfully updated
+            if cursor.rowcount > 0:
+                return JsonResponse({"success": True})
+            else:
+                return JsonResponse({"success": False, "error": "Pet not available for adoption."})
 
-    return render(request, 'adopt_pet.html', {'pet': pet})
-
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    else:
+        return JsonResponse({"success": False, "error": "Invalid request method."})
 

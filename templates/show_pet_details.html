@@ -133,11 +133,46 @@
                             {% endif %}
                             </div>
 						<div class="about_text">
-							<p>Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus massa.Tempor massa et laoreet .Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu laoreet ante, sollicitudin volutpat quam. Vestibulum posuere malesuada ultrices. In pulvinar rhoncus lacus at aliquet. Nunc vitae lacus varius, auctor nisi sit amet, consectetur mauris. Curabitur sodales semper est, vel faucibus urna laoreet vel. Ut justo diam, sodales non pulvinar at, vulputate quis neque. Etiam aliquam purus vel ultricies consequat.</p>
+							<p>{{ pet.serial_no }}Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus massa.Tempor massa et laoreet .Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu laoreet ante, sollicitudin volutpat quam. Vestibulum posuere malesuada ultrices. In pulvinar rhoncus lacus at aliquet. Nunc vitae lacus varius, auctor nisi sit amet, consectetur mauris. Curabitur sodales semper est, vel faucibus urna laoreet vel. Ut justo diam, sodales non pulvinar at, vulputate quis neque. Etiam aliquam purus vel ultricies consequat.</p>
 						</div>
 						{% if pet.adopter_nid == None %}
-						<div class="button about_button"><a href="{% url 'adopt_pet' pet.serial_no %}">Adopt {{pet.name}} ? </a></div>
+						<!--<div class="button about_button"><a href="{% url 'adopt_pet' pet.serial_no %}">Adopt {{pet.name}} ? </a></div>-->
+						
+						<div class="button about_button">
+							<a href="#" onclick="adoptPet('{{ pet.serial_no }}', '{{ pet.name }}')">Adopt {{ pet.name }} ?</a>
+						</div>
 						{% endif %}
+						
+						<script>
+							function adoptPet(petSerialNo, petName) {
+								// Show confirmation dialog
+								const isConfirmed = confirm(`Are you sure you want to adopt ${petName}?`);
+								if (isConfirmed) {
+									// Send a POST request to the backend for adoption
+									fetch(`/pet/adopt/${petSerialNo}/`, {
+										method: 'POST',
+										headers: {
+											'Content-Type': 'application/json',
+											'X-CSRFToken': '{{ csrf_token }}' // Ensure CSRF protection
+										}
+									})
+										.then(response => response.json())
+										.then(data => {
+											if (data.success) {
+												alert(`${petName} has been successfully adopted!`);
+												location.reload(); // Reload the page to update the status
+											} else {
+												alert(`Failed to adopt ${petName}: ${data.error}`);
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+											alert('Something went wrong. Please try again.');
+										});
+								}
+							}
+						</script>
+						
 					</div>
 				</div>
 				<div class="col-lg-6">

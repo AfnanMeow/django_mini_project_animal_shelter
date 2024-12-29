@@ -44,7 +44,7 @@ class Adopter(models.Model):
     #adoption_time = models.TimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"Adopter: {self.user.name}" #we need to bring adoption date from pet table
+        return f"Adopter: {self.user.first_name} {self.user.last_name}" #we need to bring adoption date from pet table
 
 # AUTHORITY Model (Specific Role for Users)
 class Authority(models.Model):

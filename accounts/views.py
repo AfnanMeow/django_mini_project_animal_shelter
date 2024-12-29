@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from accounts.models import User
+from django.db import connection
 # Create your views here.
 def signup(request) :
     if request.method == "POST":
@@ -23,9 +24,16 @@ def signup(request) :
             if User.objects.filter(username = username).exists():
                 messages.info(request, "Username Taken")
                 return redirect("signup")
-            elif  User.objects.filter(email=email).exists():
-                messages.info(request, "Email Taken")     
-                return redirect("signup")
+            #elif  User.objects.filter(email=email).exists():
+                #messages.info(request, "Email Taken")     
+                #return redirect("signup")
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT email FROM accounts_user WHERE email = %s", [email])
+                result = cursor.fetchone()
+
+            if result:  # If result is not None, the email exists
+                messages.info(request, "Email Taken")
+                return redirect("signup")    
             else :  
                 user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name, nid = nid,
                                                 phone= phone, street = street, house = house, postal_code = postalcode, police_station = policestation)                              
@@ -33,8 +41,8 @@ def signup(request) :
                                                 #phone= phone, street_no = street_no, house_no = house_no, postal_code = postalcode, police_station = policestation)
                 user.save()
 
-                messages.info(request, "User Created Successfully")
-                return redirect("signup")
+                messages.info(request, "User Created Successfully Now Login")
+                return redirect("signin")
         else : 
             messages.info(request, "Password Not Matching")
         return redirect("signup")

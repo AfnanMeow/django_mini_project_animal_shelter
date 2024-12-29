@@ -18,6 +18,12 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
+				<div>
+					{% for message in messages %}
+					<h3 style="color: #ee0909" class="error-message"> Msg : {{ message }}</h3>
+					{% endfor %}
+	
+				</div>
 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section">Sign Up Piliz</h2>
 				</div>
@@ -84,12 +90,17 @@
 								</div>
 	            </div>
 	          </form>
-			  <div>
-				{% for message in messages %}
-    			<h3 style="color: #ee0909" class="error-message"> Msg : {{ message }}</h3>
-				{% endfor %}
 
-			  </div>
+			  <!--<script>
+				document.addEventListener("DOMContentLoaded", () => {
+					const messages = JSON.parse('{{ messages|escapejs }}');
+					messages.forEach((msg) => {
+						alert(msg); // Standard browser alert box
+					});
+				});
+			  </script>-->
+			
+			
 
 
 	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
