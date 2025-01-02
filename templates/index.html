@@ -31,7 +31,7 @@
 							<div class="logo"><a href="index.html">BRACU_Shelter</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li class="active"><a href="index.html">Home</a></li>
+									<li class="active"><a href="{% url 'index' %}">Home</a></li>
 									<li><a href="about.html">About us</a></li>
 									<li><a href="#">Services</a></li>
 									<li><a href="contact.html">Contact</a></li>
@@ -280,7 +280,11 @@
 								
 							</div>
 							<div class="destination_content">
-								<div class="destination_title"><a href="destinations.html">{{pet_i.name}}</a></div>
+								{% if user.is_authenticated %}
+								<div class="destination_title"><a href="{% url 'show_pet_details' serial_no=pet_i.serial_no %}">{{pet_i.name}}</a></div>
+								{% else %}
+								<div class="destination_title"><a href="{% url 'signup' %}">{{pet_i.name}}</a></div>
+								{% endif %}
 								<div class="destination_subtitle"><p>{{pet_i.description}}</p></div>
 								<div class="destination_price">From ৳{{pet_i.estimated_cost}}</div>
 							</div>

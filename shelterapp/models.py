@@ -17,7 +17,6 @@ from accounts.models import User, Donor, Adopter, Authority
 
 # PET Model
 class Pet(models.Model):
-
     serial_no = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=255)
     img = models.ImageField(upload_to = "pics")

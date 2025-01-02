@@ -9,7 +9,9 @@ from .models import Pet
 
 
 # Create your views here.
+def home(request):
 
+    return render (request, "index.html")
 
 def index(request):
     # Retrieve search criteria from the form
