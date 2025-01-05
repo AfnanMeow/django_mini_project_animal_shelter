@@ -14,60 +14,41 @@ from django.conf import settings
 
 # Create your views here.
 def home(request):
-
     return render (request, "index.html")
 
 def index(request):
-    # Retrieve search criteria from the form
     serialno_query = request.GET.get('serial_no', '')
     name_query = request.GET.get('name', '')
     type_query = request.GET.get('type', '')
     estCost_query = request.GET.get('estimated_cost', '')
     status_query = request.GET.get('status', '')
-    # Fetch all animals from the database if Queries are empty
     if serialno_query and name_query and type_query and estCost_query == None :
         pets = Pet.objects.all()
-    
-        # Pass the fetched pets to the template
         return render(request, "index.html", {"pets": pets})
-    
     else :
         query = "SELECT * FROM shelterapp_pet WHERE 1=1"  # Start with a base query
         params = []
-        pets = Pet.objects.all() #by default it will show all animals, naile last e pets reffered before assigned dekhai
+        pets = Pet.objects.all()
         if serialno_query:
-            #pets = pets.filter(serial_no__icontains=serialno_query)
             query += " AND serial_no LIKE %s"
             params.append(f"%{serialno_query}%")
-
         if name_query:
-            #pets = pets.filter(name__icontains=name_query)
             query += " AND name LIKE %s"
             params.append(f"%{name_query}%")
         if type_query:
-            #pets = pets.filter(type__icontains=type_query)
             query += " AND type LIKE %s"
             params.append(f"%{type_query}%")
         if estCost_query:
             try:
                 budget = int(estCost_query)
-                #pets = pets.filter(estimated_cost__lte=budget)
                 query += " AND estimated_cost <= %s"
                 params.append(budget)
-                
             except ValueError:
-                #pets = pets.none()  # Invalid budget input
                 query += " AND 1=0"
-        
         if status_query:
-            # Add condition for status filter
             query += " AND status = %s"
             params.append(status_query)
-                
         pets = Pet.objects.raw(query, params)
-
-
-        # Render the results in the template
         return render(request, "index.html", {
             "pets": pets,
             "serialno_query": serialno_query,
@@ -76,10 +57,6 @@ def index(request):
             "estCost_query": estCost_query,
             "status_query": status_query,
             })
-    
-
-
-#now we're making history the very first time by sending request with a value
 
 def show_pet_details(request, serial_no):
     pet = get_object_or_404(Pet, serial_no=serial_no)

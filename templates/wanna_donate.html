@@ -29,17 +29,13 @@
 				<div class="col">
 					<div class="header_content d-flex flex-row align-items-center justify-content-start">
 						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">Travello</a></div>
-							<nav class="main_nav">
+							<div class="logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
+							<!--nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li><a href="index.html">Home</a></li>
-									<li><a href="about.html">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="news.html">News</a></li>
-									<li class="active"><a href="contact.html">Contact</a></li>
+									<li><a href="{% url 'index' %}">Home</a></li>
 								</ul>
 							</nav>
-							<div class="header_phone ml-auto">Call us: 00-56 445 678 33</div>
+							<div class="header_phone ml-auto">Call us: 00-56 445 678 33</div-->
 
 							<!-- Hamburger -->
 
@@ -66,7 +62,7 @@
 
 	<!-- Menu -->
 
-	<div class="menu">
+	<!--div class="menu">
 		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
 			<div class="menu_logo"><a href="index.html">Travello</a></div>
 			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
@@ -91,12 +87,12 @@
 				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 			</ul>
 		</div>
-	</div>
+	</div-->
 	
 	<!-- Home -->
 
 	<div class="home">
-		<div class="background_image" style="background-image:url({% static 'images/contact.jpg' %})"></div>
+		<div class="background_image" style="background-image:url({% static 'login_signup\images\bgg.jpg' %})"></div>
 	</div>
 
 	<!-- Search -->
@@ -141,21 +137,21 @@
 			
 						</div>
 						<div class="contact_text">
-							<p>Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus massa.Tempor massa et laoreet. Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus massa.</p>
+							<p>Explore BRACU Shelter, where compassion meets technology. We manage pet donations, adoptions, and care effortlessly while connecting loving pets with their forever homes.</p>
 						</div>
 						<div class="contact_list">
 							<ul>
 								<li>
 									<div>address:</div>
-									<div>1481 Creekside Lane Avila Beach, CA 931</div>
+									<div>520, BRACU_Shelter, Badda, 1212</div>
 								</li>
 								<li>
 									<div>phone:</div>
-									<div>+53 345 7953 32453</div>
+									<div>+44 5567 89 3322 332</div>
 								</li>
 								<li>
 									<div>email:</div>
-									<div>yourmail@gmail.com</div>
+									<div>donor@bracushelter.com</div>
 								</li>
 							</ul>
 						</div>
@@ -200,6 +196,7 @@
 								<img id="imagePreview" src="" alt="Image Preview" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;">
 							</div>
 							<button type="submit" class="contact_button">Submit</button>
+							<p><strong> After you are done submitting, please wait for only 24 hours, we will contact you as soon as possible. </strong></p>
 						</form>
 					</div>
 				</div>
@@ -210,20 +207,20 @@
 
 	<!-- Map -->
 
-	<div class="contact_map">
+	<!--div class="contact_map">
 		<!-- Google Map -->
-		<div class="map">
+		<!--div class="map">
 			<div id="google_map" class="google_map">
 				<div class="map_container">
 					<div id="map"></div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div-->
 
 	<!-- Footer -->
 
-	<footer class="footer">
+	<!--footer class="footer">
 		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
@@ -250,7 +247,7 @@
 					<div class="row">
 
 						<!-- Footer Contact Item -->
-						<div class="col-xl-4 footer_contact_col">
+						<!--div class="col-xl-4 footer_contact_col">
 							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
 								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
 								<div class="footer_contact_title">give us a call</div>
@@ -261,10 +258,10 @@
 									</ul>
 								</div>
 							</div>
-						</div>
+						</div-->
 
 						<!-- Footer Contact Item -->
-						<div class="col-xl-4 footer_contact_col">
+						<!--div class="col-xl-4 footer_contact_col">
 							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
 								<div class="footer_contact_icon"><img src="{% static 'images/trekking.svg' %}" alt=""></div>
 								<div class="footer_contact_title">come & drop by</div>
@@ -274,10 +271,10 @@
 									</ul>
 								</div>
 							</div>
-						</div>
+						</div-->
 
 						<!-- Footer Contact Item -->
-						<div class="col-xl-4 footer_contact_col">
+						<!--div class="col-xl-4 footer_contact_col">
 							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
 								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
 								<div class="footer_contact_title">send us a message</div>
@@ -293,7 +290,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div-->
 		<div class="col text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>

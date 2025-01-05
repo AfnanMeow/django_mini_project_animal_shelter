@@ -28,21 +28,16 @@
 				<div class="col">
 					<div class="header_content d-flex flex-row align-items-center justify-content-start">
 						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">BRACU_Shelter</a></div>
+							<div class="logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="{% url 'index' %}">Home</a></li>
-									<li><a href="about.html">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="contact.html">Contact</a></li>
 									{% if user.is_authenticated %}
 									<li><b>🖐{{user.first_name}}</b></li>
 									<li><h2><b><a href="accounts/logout">Logout</a><b></h2></li>
 									{% else %}
-
 									<li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
 									{% endif %}
-
 								</ul>
 							</nav>
 							<div class="header_phone ml-auto">Call us: +8801712345</div>
@@ -79,11 +74,8 @@
 		</div>
 		<div class="menu_content">
 			<ul>
-				<li><a href="inex.html">Home</a></li>
-				<li><a href="about.html">About us</a></li>
-				<li><a href="#">Services</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
 				<li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
-				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
 		<div class="menu_social">
@@ -159,9 +151,9 @@
 
 			<div class="home_page_nav">
 				<ul class="d-flex flex-column align-items-end justify-content-end">
-					<li><a href="#" data-scroll-to="#destinations">Offers<span>01</span></a></li>
+					<!--li><a href="#" data-scroll-to="#destinations">Offers<span>01</span></a></li>
 					<li><a href="#" data-scroll-to="#testimonials">Testimonials<span>02</span></a></li>
-					<li><a href="#" data-scroll-to="#news">Latest<span>03</span></a></li>
+					<li><a href="#" data-scroll-to="#news">Latest<span>03</span></a></li-->
 				</ul>
 			</div>
 		</div>
@@ -183,10 +175,11 @@
 									<input type="text" class="search_input search_input_3" placeholder="Estimated Cost", name = "estimated_cost", value="{{estCost_query}}" >                             
 									<select name="type" class="search_input search_input_4">
 										<option value="">--Select Type--</option>
-										<option value="Dog" {% if type_query == 'Dog' %}selected{% endif %}>Dog</option>
 										<option value="Cat" {% if type_query == 'Cat' %}selected{% endif %}>Cat</option>
+										<option value="Dog" {% if type_query == 'Dog' %}selected{% endif %}>Dog</option>
 										<option value="Fish" {% if type_query == 'Fish' %}selected{% endif %}>Fish</option>
 										<option value="Bird" {% if type_query == 'Bird' %}selected{% endif %}>Bird</option>
+										<option value="Rabbit" {% if type_query == 'Rabbit' %}selected{% endif %}>Rabbit</option>
 									</select>
 									<select name="status" class="search_input search_input_5">
 										<option value="">--Select Status--</option>
@@ -229,7 +222,7 @@
 							</div>
 
 							<!-- Intro Item -->
-							<div class="col-lg-4 intro_col">
+							<!--<div class="col-lg-4 intro_col">
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
 									<div class="intro_icon"><img src="{% static 'images/adopter.jpg' %}" alt=""></div>
 									<div class="intro_content">
@@ -237,7 +230,7 @@
 										<div class="intro_subtitle"><p>Find your perfect furry companion today. Give a furball a forever home!</p></div>
 									</div>
 								</div>
-							</div>
+							</div>-->
 
 							<!-- Intro Item -->
 							<div class="col-lg-4 intro_col">
@@ -245,7 +238,9 @@
 									<div class="intro_icon"><img src="{% static 'images/authority.jpg' %}" alt=""></div>
 									<div class="intro_content">
 										{% if user.is_authenticated and user.is_superuser %}
-										<div class="intro_title"><a href="{% url 'authority_view' %}"> Staff View</a></div>
+										<div class="intro_title"><a href="{% url 'authority_view' %}"> Staff View </a></div>
+										{% else %}
+										<div class="intro_title"><a href = "#"> Staff View </a></div>
 										{% endif %}
 										<div class="intro_subtitle"><p>Your time and care can make a huge impact on the animals of our shelter. Volunteer with us!</p></div>
 									</div>
@@ -293,7 +288,7 @@
 								<div class="destination_title"><a href="{% url 'signup' %}">{{pet_i.name}}</a></div>
 								{% endif %}
 								<div class="destination_subtitle"><p>{{pet_i.description}}</p></div>
-								<div class="destination_price">From ৳{{pet_i.estimated_cost}}</div>
+								<div class="destination_subtitle"><p> -- {{pet_i.status}} -- </p></div>
 							</div>
 						</div>
 						{% endfor %}
@@ -343,7 +338,7 @@
 								<div class="testimonial">"Adopting Bella was the best decision we ever made! She's brought so much joy and energy to our family. Thank you for connecting us with our fluffy best friend!"</div>
 								<div class="testimonial_author">
 									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
-										<div>Jane,</div>
+										<div>Samuel,</div>
 										<div>adopter</div>
 									</div>
 								</div>
@@ -351,11 +346,11 @@
 
 							<!-- Slide -->
 							<div class="owl-item text-center">
-								<div class="testimonial">"Max was rescued from a tough situation, and now he is the happiest pup ever. We cannot thank the shelter enough for all their support during the adoption process!"</div>
+								<div class="testimonial">"Leo was rescued from a tough situation, and now he is the happiest pup ever. We cannot thank the shelter enough for all their support during the adoption process!"</div>
 								<div class="testimonial_author">
 									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
-										<div>Alice,</div>
-										<div>adopters</div>
+										<div>David,</div>
+										<div>adopter</div>
 									</div>
 								</div>
 							</div>
@@ -489,10 +484,10 @@
 				<div class="col">
 					<div class="newsletter">
 						<div class="newsletter_title_container text-center">
-							<div class="newsletter_title">Subscribe to our newsletter the latest adoption news & updates</div>
-							<div class="newsletter_subtitle">Join our community of pet lovers today!</div>
+							<div class="newsletter_title">Stay connected with our shelter — sign up for the updates, and heartwarming adoption journeys!</div>
+							<div class="newsletter_subtitle">Join our community of pet lovers!</div>
 						</div>
-						<div class="newsletter_form_container">
+						<!--div class="newsletter_form_container">
 							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
 								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
 									<div><input type="text" class="newsletter_input newsletter_input_name" id="newsletter_input_name" placeholder="Name" required="required"><div class="input_border"></div></div>
@@ -500,7 +495,7 @@
 								</div>
 								<div><button class="newsletter_button">Subscribe</button></div>
 							</form>
-						</div>
+						</div-->
 					</div>
 				</div>
 			</div>
@@ -542,7 +537,7 @@
 								<div class="footer_contact_title">Send us an email</div>
 								<div class="footer_contact_list">
 									<ul>
-										<li>support@petshelter.com</li>
+										<li>support@bracushelter.com</li>
 									</ul>
 								</div>
 							</div>
@@ -553,6 +548,8 @@
 			</div>
 		</div>
 		<div class="col text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+			
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
 	</footer>

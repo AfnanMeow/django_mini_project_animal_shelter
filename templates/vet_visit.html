@@ -45,7 +45,7 @@
                                             <li><a href="{% url 'vet_visit' %}">Vet Status</a></li>
                                             {% if user.is_authenticated %}
                                             <li><b>🖐{{user.first_name}}</b></li>
-                                            <li><h2><b><a href="accounts/logout">Logout</a><b></h2></li>
+                                            <li><h2><b><a href="{% url 'logout' %}">Logout</a><b></h2></li>
                                             <li><a href="{% url 'signup' %}" style="color: red;">Create User</a></li>
                                             <li><a href="{% url 'wanna_donate' %}" style="color: red;">Create Pet</a></li>
                                             {% endif %}

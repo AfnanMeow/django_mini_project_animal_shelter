@@ -14,24 +14,24 @@
 
 
 	</head>
-	<body class="img js-fullheight" style="background-image: url({% static 'login_signup/images/bggg.jpg' %})">
+	<body class="img js-fullheight" style="background-image: url({% static 'login_signup/images/bgpic.jpg' %})">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div>
 					{% for message in messages %}
-					<h3 style="color: #ee0909" class="error-message"> Msg : {{ message }}</h3>
+					<h3 style="color:rgb(228, 32, 32)" class="error-message"> Msg : {{ message }}</h3>
 					{% endfor %}
 	
 				</div>
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Sign Up Piliz</h2>
+					<h2 class="heading-section">Sign Up Please</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center"><a href="signin" style="color: rgb(255, 255, 255);"><b><u>Have an account?</u></b></a></h3>
+		      	<h3 class="mb-4 text-center"><a href="signin" style="color: rgb(248, 245, 245);"><b><u>Have an account?</u></b></a></h3>
 		      	<form action="signup" class="signin-form" method = "post">
 
 					{% csrf_token %}
@@ -85,9 +85,9 @@
 									  <span class="checkmark"></span>
 									</label>
 								</div>
-								<div class="w-50 text-md-right">
+								<!--div class="w-50 text-md-right">
 									<a href="#" style="color: #fff">Forgot Password</a>
-								</div>
+								</div-->
 	            </div>
 	          </form>
 
@@ -103,11 +103,11 @@
 			
 
 
-	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+	          <!--p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
 	          <div class="social d-flex text-center">
 	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
 	          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
-	          </div>
+	          </div-->
 		      </div>
 				</div>
 			</div>

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
-    'calc',
     "shelterapp",
     "accounts"   #myapp
 ]
@@ -84,9 +83,9 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
         "NAME" : "BRACU_SHELTER",
         "USER" : "root",
-        "PASSWORD" : "1234",
+        "PASSWORD" : "12345",
         "HOST" : "localhost",
-        "PORT" : "3306",
+        "PORT" : "3305",
 
     }
 }

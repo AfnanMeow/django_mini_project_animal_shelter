@@ -45,7 +45,7 @@
                                             <li><a href="{% url 'vet_visit' %}">Vet Status</a></li>
                                             {% if user.is_authenticated %}
                                             <li><b>🖐{{user.first_name}}</b></li>
-                                            <li><h2><b><a href="accounts/logout">Logout</a><b></h2></li>
+                                            <li><h2><b><a href="{% url 'logout' %}">Logout</a><b></h2></li>
                                             <li><a href="{% url 'signup' %}" style="color: red;">Create User</a></li>
                                             <li><a href="{% url 'wanna_donate' %}" style="color: red;">Create Pet</a></li>
                                             {% endif %}
@@ -81,16 +81,13 @@
         
             <div class="menu">
                 <div class="menu_header d-flex flex-row align-items-center justify-content-start">
-                    <div class="menu_logo"><a href="index.html">BRACU_Shelter</a></div>
+                    <div class="menu_logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
                     <div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
                 </div>
                 <div class="menu_content">
                     <ul>
-                        <li><a href="inex.html">Home</a></li>
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="menu_social">
@@ -164,19 +161,19 @@
         
                     </div>
         
-                    <div class="home_page_nav">
+                    <!--div class="home_page_nav">
                         <ul class="d-flex flex-column align-items-end justify-content-end">
                             <li><a href="#" data-scroll-to="#destinations">Offers<span>01</span></a></li>
                             <li><a href="#" data-scroll-to="#testimonials">Testimonials<span>02</span></a></li>
                             <li><a href="#" data-scroll-to="#news">Latest<span>03</span></a></li>
                         </ul>
-                    </div>
+                    </div-->
                 </div>
             </div>
         
             <!-- Search -->
         
-            <div class="home_search">
+            <!--div class="home_search">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -216,12 +213,12 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-4">
-					<h2 class="heading-section">Table #01 Pet Table</h2>
+					<h2 class="heading-section">Pet Table</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="h5 mb-4 text-center">Table Accordion</h3>
+					<!--h3 class="h5 mb-4 text-center">Table Accordion</h3-->
 					<div class="table-wrap">
                         <div style="overflow-x: auto; white-space: nowrap;">
 						<table class="table">
@@ -241,7 +238,8 @@
                                 <th>Adoption Date</th>
                                 <th>Adoption Time</th>
                                 <th>Adopter NID</th>
-                                <th>Remove</th>
+                                <th>Vet Details</th>
+                                <!--th>Remove</th-->
                               </tr>
                             </thead>
                             
@@ -261,7 +259,7 @@
                                 <td>
                                   <div class="email">
                                     <span>{{pet_i.description}}</span>
-                                    <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
+                                    <!--span>Fugiat voluptates quasi nemo, ipsa perferendis</span-->
                                   </div>
                                 </td>
                                 <td>{{pet_i.serial_no}}</td>
@@ -282,9 +280,15 @@
                                 <td>{{pet_i.adoption_time}}</td>
                                 <td>NiD {{pet_i.adopter_nid_id}} {{pet_i.adopter_nid}}</td>
                                 <td>
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    {% for visit in pet_i.visits.all %}
+										<p><strong>Vet Name:</strong> {{ visit.vet.name }}</p>
+										<p><strong>Medicines Prescribed:</strong> {{ visit.medicines }}</p>
+										<p><strong>Visit Date:</strong> {{ visit.date }}</p>
+                                        <p><strong>Reason:</strong> {{ visit.reason }}</p>
+									{% endfor %}
+                                  <!--button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                                  </button>
+                                  </button-->
                                 </td>
                               </tr>
                               <td></td>

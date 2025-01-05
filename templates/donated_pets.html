@@ -33,13 +33,10 @@
 				<div class="col">
 					<div class="header_content d-flex flex-row align-items-center justify-content-start">
 						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">BRACU_Shelter</a></div>
+							<div class="logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="{% url 'index' %}">Home</a></li>
-									<li><a href="about.html">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="contact.html">Contact</a></li>
 									{% if user.is_authenticated %}
 									<li><b>🖐{{user.first_name}}</b></li>
 									<li><h2><b><a href="{% url 'logout' %}">Logout</a><b></h2></li>
@@ -76,16 +73,13 @@
 
 	<div class="menu">
 		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
-			<div class="menu_logo"><a href="index.html">BRACU_Shelter</a></div>
+			<div class="menu_logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
 			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
 		</div>
 		<div class="menu_content">
 			<ul>
-				<li><a href="inex.html">Home</a></li>
-				<li><a href="about.html">About us</a></li>
-				<li><a href="#">Services</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
 				<li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
-				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
 		<div class="menu_social">
@@ -122,7 +116,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="h5 mb-4 text-center">{{user.first_name}} {{user.last_name}} has {{ pets|length }} item(s) so far.</h3>
+                        <h3 class="h5 mb-4 text-center">{{user.first_name}} {{user.last_name}} has donated {{ pets|length }} pets so far.</h3>
                         <div class="table-wrap">
                             <table class="table">
                               <thead class="thead-primary">

@@ -30,16 +30,13 @@
 				<div class="col">
 					<div class="header_content d-flex flex-row align-items-center justify-content-start">
 						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">BRACU_Shelter</a></div>
+							<div class="logo"><a href="{% url 'index' %}">BRACU_Shelter</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="{% url 'index' %}">Home</a></li>
-									<li><a href="about.html">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="contact.html">Contact</a></li>
 									{% if user.is_authenticated %}
 									<li><b>🖐{{user.first_name}}</b></li>
-									<li><h2><b><a href="{% url 'logout' %}">Logout</a><b></h2></li>
+									<li><b><a href="{% url 'logout' %}">Logout</a><b></li>
 									{% endif %}
 
 								</ul>
@@ -69,35 +66,7 @@
 		</div>
 	</header>
 
-	<!-- Menu -->
 
-	<div class="menu">
-		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
-			<div class="menu_logo"><a href="index.html">BRACU_Shelter</a></div>
-			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
-		</div>
-		<div class="menu_content">
-			<ul>
-				<li><a href="inex.html">Home</a></li>
-				<li><a href="about.html">About us</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="accounts/signup" style="color: red;">Sign up / Sign in</a></li>
-				<li><a href="contact.html">Contact</a></li>
-			</ul>
-		</div>
-		<div class="menu_social">
-			<div class="menu_phone ml-auto">Call us: +8801712345</div>
-			<ul class="d-flex flex-row align-items-start justify-content-start">
-				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-			</ul>
-		</div>
-	</div>
-	
 	<!-- Home -->
 
 	<div class="home">
@@ -111,7 +80,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col text-center">
-					<div class="section_subtitle">حَدَّثَنَا أَحْمَدُ بْنُ حَنْبَلٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، حَدَّثَنَا عُمَرُ بْنُ زَيْدٍ الصَّنْعَانِيُّ، أَنَّهُ سَمِعَ أَبَا الزُّبَيْرِ، عَنْ جَابِرٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم نَهَى عَنْ ثَمَنِ الْهِرَّةِ </div>
+					<!--div class="section_subtitle">حَدَّثَنَا أَحْمَدُ بْنُ حَنْبَلٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، حَدَّثَنَا عُمَرُ بْنُ زَيْدٍ الصَّنْعَانِيُّ، أَنَّهُ سَمِعَ أَبَا الزُّبَيْرِ، عَنْ جَابِرٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم نَهَى عَنْ ثَمَنِ الْهِرَّةِ </div-->
 					<div class="section_title"><h2>A few words about {{ pet.name }}</h2><h4><strong><a href="{% url 'adopted_pets' %}"> Pets I adopted so far ➡</a></strong></h4></div>
 				</div>
 			</div>
@@ -122,22 +91,36 @@
                             <p><strong>Type:</strong> {{ pet.type }}</p>
                             <p><strong>Description:</strong> {{ pet.description }}</p>
                             <p><strong>Estimated Cost:</strong> ৳{{ pet.estimated_cost }}</p>
-                            <p><strong>Status:</strong> {{pet.status}}</p>
-                            <p><strong>{{ pet.donor_nid }} Date : {{pet.donation_date}} Time : {{pet.donation_time}}</strong> </p>
-							<p><strong>Donors NID: {{pet.donor_nid_id}}</strong></p>
-                            {% if pet.adopter_nid %}
+							<p><strong>Status:</strong> {{pet.status}}</p>
+                            <p><strong>{{ pet.donor_nid }} {{ pet.name }} on {{pet.donation_date}} at {{pet.donation_time}}</strong> </p>
+							<!--p><strong>Donor NID: {{pet.donor_nid_id}}</strong></p-->
+							<p><strong>Vet Visit Details:</strong></p>
+                            {% if pet.visits.all %}
+                                {% for visit in pet.visits.all %}
+                                    <p><strong>Vet Name:</strong> {{ visit.vet.name }}</p>
+                                    <p><strong>Medicines Prescribed:</strong> {{ visit.medicines }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No vet visit details available for this pet.</p>
+                            {% endif %}
+							{% if pet.adopter_nid %}
                                 <p><strong>{{ pet.adopter_nid }} adopted on Date :{{pet.adoption_date}} Time : {{pet.adoption_time}}</strong> </p>
-								<p><strong>Adopter's NID : {{pet.adopter_nid_id}}</strong></p>
+								<p><strong>Adopter NID : {{pet.adopter_nid_id}}</strong></p>
                             {% else %}
                                 <p><strong>Adopter:</strong> Not yet adopted</p>
                             {% endif %}
-                            </div>
+                        </div>
+					
 						<div class="about_text">
-							<p>{{ pet.serial_no }}Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus massa.Tempor massa et laoreet .Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu laoreet ante, sollicitudin volutpat quam. Vestibulum posuere malesuada ultrices. In pulvinar rhoncus lacus at aliquet. Nunc vitae lacus varius, auctor nisi sit amet, consectetur mauris. Curabitur sodales semper est, vel faucibus urna laoreet vel. Ut justo diam, sodales non pulvinar at, vulputate quis neque. Etiam aliquam purus vel ultricies consequat.</p>
+							<p>{{ pet.name }} 
+								{% if pet.adopter_nid %}
+									has been adopted and is now happily living with its new family! Thank you for considering the adoption. 
+								{% else %}
+									This pet is still waiting for its forever home. It is full of love and ready to be a part of your family. If you are interested in adopting this pet, please feel free to reach out to us for more information.
+								{% endif %}
+							</p>
 						</div>
 						{% if pet.adopter_nid == None %}
-						<!--<div class="button about_button"><a href="{% url 'adopt_pet' pet.serial_no %}">Adopt {{pet.name}} ? </a></div>-->
-						
 						<div class="button about_button">
 							<a href="#" onclick="adoptPet('{{ pet.serial_no }}', '{{ pet.name }}')">Adopt {{ pet.name }} ?</a>
 						</div>
@@ -177,7 +160,7 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="about_image"><img src="{{ baseURL }}/{{ pet.img }}" alt="{{ pet.name }}" style="max-width: 100%; height: auto;"> </div>
-					<div class="about_image"><img src="{{pet.img.url}}" alt="{{ pet.name }}" style="max-width: 100%; height: auto;"> </div>
+					<!--div class="about_image"><img src="{{pet.img.url}}" alt="{{ pet.name }}" style="max-width: 100%; height: auto;"> </div-->
 				</div>
                 <a href="{% url 'index' %}">Back to Landing Page</a>    
 			</div>
