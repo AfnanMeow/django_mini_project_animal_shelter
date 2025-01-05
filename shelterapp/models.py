@@ -30,10 +30,11 @@ class Pet(models.Model):
     adoption_time = models.TimeField(null=True, blank=True)
 
 
+
     # Relationships
 
-    donor_nid = models.OneToOneField(Donor, to_field='user_id', related_name="donated_pets", on_delete=models.CASCADE)
-    adopter_nid = models.OneToOneField(Adopter, to_field='user_id', related_name="adopted_pets", on_delete=models.SET_NULL, null=True, blank=True)
+    donor_nid = models.ForeignKey(Donor, to_field='user_id', related_name="donated_pets",unique = False, on_delete=models.CASCADE)
+    adopter_nid = models.ForeignKey(Adopter, to_field='user_id', related_name="adopted_pets", on_delete=models.SET_NULL, unique = False, null=True, blank=True)
 
 
     #donor = models.ForeignKey(Donor, to_field='user_id', related_name="donated_pets", on_delete=models.CASCADE, unique=True)

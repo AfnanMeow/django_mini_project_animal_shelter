@@ -84,9 +84,9 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
         "NAME" : "BRACU_SHELTER",
         "USER" : "root",
-        "PASSWORD" : "12345",
+        "PASSWORD" : "1234",
         "HOST" : "localhost",
-        "PORT" : "3305",
+        "PORT" : "3306",
 
     }
 }
@@ -132,6 +132,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 #eita I dunno what & whyI did that ( is it physical ?)
 STATIC_ROOT = os.path.join(BASE_DIR, "asssets")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 # Default primary key field type

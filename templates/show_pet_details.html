@@ -112,7 +112,7 @@
 			<div class="row">
 				<div class="col text-center">
 					<div class="section_subtitle">حَدَّثَنَا أَحْمَدُ بْنُ حَنْبَلٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، حَدَّثَنَا عُمَرُ بْنُ زَيْدٍ الصَّنْعَانِيُّ، أَنَّهُ سَمِعَ أَبَا الزُّبَيْرِ، عَنْ جَابِرٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم نَهَى عَنْ ثَمَنِ الْهِرَّةِ </div>
-					<div class="section_title"><h2>A few words about {{ pet.name }}</h2></div>
+					<div class="section_title"><h2>A few words about {{ pet.name }}</h2><h4><strong><a href="{% url 'adopted_pets' %}"> Pets I adopted so far ➡</a></strong></h4></div>
 				</div>
 			</div>
 			<div class="row about_row">
@@ -177,6 +177,7 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="about_image"><img src="{{ baseURL }}/{{ pet.img }}" alt="{{ pet.name }}" style="max-width: 100%; height: auto;"> </div>
+					<div class="about_image"><img src="{{pet.img.url}}" alt="{{ pet.name }}" style="max-width: 100%; height: auto;"> </div>
 				</div>
                 <a href="{% url 'index' %}">Back to Landing Page</a>    
 			</div>

@@ -218,7 +218,11 @@
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
 									<div class="intro_icon"><img src="{% static 'images/donor.jpg' %}" alt=""></div>
 									<div class="intro_content">
-										<div class="intro_title">Wanna Donate ?</div>
+										{% if user.is_authenticated %}
+										<div class="intro_title"><a href = "{% url 'wanna_donate' %}">Wanna Donate ? </a></div>
+										{% else %}
+										<div class="intro_title"><a href = "{% url 'signup' %}">Wanna Donate ? </a></div>
+										{% endif %}
 										<div class="intro_subtitle"><p>Your donation can help improve the lives of small animals in need. Join us in making a difference!</p></div>
 									</div>
 								</div>
@@ -240,7 +244,9 @@
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
 									<div class="intro_icon"><img src="{% static 'images/authority.jpg' %}" alt=""></div>
 									<div class="intro_content">
-										<div class="intro_title">Wanna Volunteer?</div>
+										{% if user.is_authenticated and user.is_superuser %}
+										<div class="intro_title"><a href="{% url 'authority_view' %}"> Staff View</a></div>
+										{% endif %}
 										<div class="intro_subtitle"><p>Your time and care can make a huge impact on the animals of our shelter. Volunteer with us!</p></div>
 									</div>
 								</div>
@@ -272,6 +278,7 @@
 						<div class="destination item">
 							<div class="destination_image">
 								<img src="{{baseURL}}/{{pet_i.img}}" alt="">
+								<img src="{{pet_i.img.url}}" alt="">
 								{% if user.is_authenticated %}
 								<div class="spec_offer text-center"><a href="{% url 'show_pet_details' serial_no=pet_i.serial_no %}"> Show Details</a></div>
 								{% else %}
@@ -290,6 +297,23 @@
 							</div>
 						</div>
 						{% endfor %}
+						<!--{% if user.is_authenticated %}
+						{% for pet_i in pets %}
+						<div class="destination item">
+							<div class="destination_image">
+								
+								<img src="{{pet_i.img.url}}" alt="">
+								<div class="spec_offer text-center"><a href="{% url 'show_pet_details' serial_no=pet_i.serial_no %}"> Show Details</a></div>
+								
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="{% url 'show_pet_details' serial_no=pet_i.serial_no %}">{{pet_i.name}}</a></div>
+								<div class="destination_subtitle"><p>{{pet_i.description}}</p></div>
+								<div class="destination_price">From ৳{{pet_i.estimated_cost}}</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% endif %}-->
 					
 					</div>
 				</div>
